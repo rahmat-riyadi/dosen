@@ -5,10 +5,10 @@
             <p class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form>
+            {{-- <form> --}}
                 <div class="mb-3 d-flex flex-column">
                     <label for="inputSK" class="form-label">SK Pembimbing</label>
-                    <input type="file" wire:model.lazy="file" class="form-control" id="inputSK" placeholder="">
+                    <input type="file" wire:model="file" class="form-control" id="inputSK" placeholder="">
                     @error('file')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -52,7 +52,7 @@
                         </div>
                     @enderror
                 </div>
-            </form>
+            {{-- </form> --}}
         </div>
         <div class="modal-footer">
             <button type="submit" wire:click="handleSubmit" class="btn btn-primary">Simpan</button>

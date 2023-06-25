@@ -40,6 +40,7 @@ class LoginComponent extends Component
 
         $this->emit('loginFailed');
         return;
+        
 
     }
 

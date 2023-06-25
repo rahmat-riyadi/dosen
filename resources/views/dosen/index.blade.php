@@ -125,7 +125,7 @@
                                 <td>{{ Carbon\Carbon::parse($item->pivot->tanggal)->format('d-m-Y') }}, {{ Carbon\Carbon::parse($item->pivot->waktu)->format('H:i:s') }} WITA</td>
                                 <td class='d-flex gap-3'>
                                     <button data-meet="{{ $item->pivot->id }}" onclick="getMeetId(this)" class="btn btn-success acc-schedule" data-bs-toggle="modal" data-bs-target="#terimaBimbingan">Terima</button>
-                                    <button data-meet="{{ $item->pivot->id }}" onclick="getMeetId(this)" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#aturUlangJadwal">Atur Ulang Jadwal</button>
+                                    <button data-meet="{{ $item->pivot->id }}" data-date="{{ Carbon\Carbon::parse($item->pivot->tanggal)->format('d-m-Y') }}, {{ Carbon\Carbon::parse($item->pivot->waktu)->format('H:i:s') }}" onclick="getMeetId(this)" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#aturUlangJadwal">Atur Ulang Jadwal</button>
                                 </td>
                             </tr>
                         @endif
@@ -267,6 +267,7 @@
 
         function getMeetId(btn){
             meetId = btn.dataset.meet
+            document.querySelector('.old-date').value = btn.dataset.date
         }
 
         function handleAcc(){

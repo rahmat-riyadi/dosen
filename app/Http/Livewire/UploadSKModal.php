@@ -26,6 +26,7 @@ class UploadSKModal extends Component
         'dosen_2_id.required' => 'dosen pembimbing 2 harus diisi',
         'judul.required' => 'masukan judul skripsi',
         'file.required' => 'lampiran SK pembimbing',
+        'file.max' => 'lampiran SK tidak boleh lebih dari 3MB',
     ];
 
     public function mount(){
@@ -42,7 +43,7 @@ class UploadSKModal extends Component
         $this->validate([
             'dosen_1_id' => 'required',
             'dosen_2_id' => 'required',
-            'file' => 'required',
+            'file' => 'required|max:3024',
             'judul' => 'required'
         ]);
 

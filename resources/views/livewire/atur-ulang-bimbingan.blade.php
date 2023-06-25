@@ -9,10 +9,14 @@
                 <label for="catatanTerima" class='form-label'>Catatan</label>
                 <textarea wire:model.lazy="note" class='form-control h-100' name="" id="catatanTerima" rows='3'></textarea>
             </div>
+            <div class='col-md-12'>
+                <label for="catatanTerima" class='form-label'>Waktu Bimbingan Awal</label>
+                <input readonly class='form-control position-relative old-date' type="text" name="" id="">
+            </div>
             <div class="row">
                 <label for="" class="form-label">Waktu Bimbingan</label>
                 <div class="col-md-6">
-                    <input wire:model.lazy="tanggal" class='form-control position-relative' type="date" name="" id="">
+                    <input wire:model.lazy="tanggal" min="{{ \Carbon\Carbon::now()->addDay()->format('Y-m-d') }}" class='form-control position-relative' type="date" name="" id="">
                 </div>
                 <div class="col-md-6">
                     <input wire:model.lazy="waktu" class='form-control position-relative' type="time" name="" id="">

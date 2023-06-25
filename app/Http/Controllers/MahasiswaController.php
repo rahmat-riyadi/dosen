@@ -20,8 +20,6 @@ class MahasiswaController extends Controller
 
     public function index(){
 
-        $dosens = Dosen::all();
-
         $schedule = Auth::user()->jadwal;
 
         $schedule = $schedule->map(function($key, $val){
@@ -39,7 +37,7 @@ class MahasiswaController extends Controller
             ];
         });
 
-        return view($this->folder.'index', compact('dosens', 'schedule'));
+        return view($this->folder.'index', compact('schedule'));
     }
 
     public function test(){

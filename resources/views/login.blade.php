@@ -17,9 +17,13 @@
 </head>
 
 <body>
+    @if (session()->has('message'))
+        <div class="alert alert-success" role="alert">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class='d-flex justify-content-center align-items-center login'>
         @livewire('login-component')
-
         <div class="toast-container position-fixed top-0 end-0 p-3">
             <div class="toast" id="alert-toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">

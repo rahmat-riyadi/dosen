@@ -133,37 +133,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (auth()->user()->jadwal as $jadwal)
-                    <tr>
-                        <td>{{ $jadwal->nama }}</td>
-                        <td class='text-center'>{{ $jadwal->pivot->pertemuan }}</td>
-                        <td>{{ $jadwal->pivot->tanggal }}, {{ $jadwal->pivot->waktu }}</td>
-                        <td>{{ $jadwal->pivot->catatan }}</td>
-                        <td>
-                            @if ($jadwal->pivot->status == 'Jadwal Diterima')
-                            <div class="badge rounded-pill text-bg-success">
-                                 {{ $jadwal->pivot->status }}
-                            </div>
-                            @elseif($jadwal->pivot->status == 'Menunggu')
-                            <div class="badge rounded-pill text-bg-warning">
-                                 {{ $jadwal->pivot->status }}
-                            </div>
-                            @else
-                            <div class="badge rounded-pill text-bg-danger">
-                                {{ $jadwal->pivot->status }}
-                            </div>
-                            @endif
-                        </td>
-                        <td class=' @if(!is_null($jadwal->pivot->file)) d-flex @endif gap-3'>
-                            @if (!is_null($jadwal->pivot->file))
-                            <button class="btn btn-outline-dark" onclick="handleClickDraft(this)" data-draf="{{ $jadwal->pivot->file }}" data-bs-toggle="modal" data-bs-target="#lihatFile">Lihat File</button>
-                            @endif
-                            @if ($jadwal->pivot->status == 'Jadwal Diterima')
-                                <button class="btn btn-success px-4" onclick="handleClickNote(this)" data-note="{{ $jadwal->pivot->catatan }}" data-bs-toggle="modal" data-bs-target="#detailCatatan">Catatan</button>
-                            @endif
-                        </td>
-                    </tr>
-                    @endforeach
+                    @if (count(auth()->user()->jadwal) != 0)
+                        @foreach (auth()->user()->jadwal as $jadwal)
+                        <tr>
+                            <td>{{ $jadwal->nama }}</td>
+                            <td class='text-center'>{{ $jadwal->pivot->pertemuan }}</td>
+                            <td>{{ $jadwal->pivot->tanggal }}, {{ $jadwal->pivot->waktu }}</td>
+                            <td>{{ $jadwal->pivot->catatan }}</td>
+                            <td>
+                                @if ($jadwal->pivot->status == 'Jadwal Diterima')
+                                <div class="badge rounded-pill text-bg-success">
+                                    {{ $jadwal->pivot->status }}
+                                </div>
+                                @elseif($jadwal->pivot->status == 'Menunggu')
+                                <div class="badge rounded-pill text-bg-warning">
+                                    {{ $jadwal->pivot->status }}
+                                </div>
+                                @else
+                                <div class="badge rounded-pill text-bg-danger">
+                                    {{ $jadwal->pivot->status }}
+                                </div>
+                                @endif
+                            </td>
+                            <td class=' @if(!is_null($jadwal->pivot->file)) d-flex @endif gap-3'>
+                                @if (!is_null($jadwal->pivot->file))
+                                <button class="btn btn-outline-dark" onclick="handleClickDraft(this)" data-draf="{{ $jadwal->pivot->file }}" data-bs-toggle="modal" data-bs-target="#lihatFile">Lihat File</button>
+                                @endif
+                                @if ($jadwal->pivot->status == 'Jadwal Diterima')
+                                    <button class="btn btn-success px-4" onclick="handleClickNote(this)" data-note="{{ $jadwal->pivot->catatan }}" data-bs-toggle="modal" data-bs-target="#detailCatatan">Catatan</button>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -260,11 +262,12 @@
         const bimbinganModal = new bootstrap.Modal(document.querySelector('.bimbinganModal'))
 
         Livewire.on('handleSubmitBimbingan', data => {
+            console.log(data)
             bimbinganModal.hide()
             swalWithBootstrapButtons.fire({
-                title: 'Berhasil',
-                text: data,
-                icon: 'success',
+                title: data.status ? 'Berhasil' : 'Gagal',
+                text: data.message,
+                icon: data.status ? 'success' : 'error',
                 confirmButtonText: 'Ok',
                 reverseButtons: true
             }).then((result) => {
@@ -281,6 +284,7 @@
         const swalWithBootstrapButtons = Swal.mixin({ customClass: { confirmButton: 'btn btn-danger font-light', }, buttonsStyling: false})
 
         Livewire.on('handleSubmitSK', data => {
+            console.log(data)
             skModal.hide()
             swalWithBootstrapButtons.fire({
                 title: 'Berhasil',
@@ -310,6 +314,17 @@
     </script>
 
     <script>
+
+        function checkSize(el){
+            var file = el.files[0];
+            var fileSize = file.size; // Ukuran file dalam bytes
+            var maxSize = 2 * 1024 * 1024; // Batas maksimal 2MB (2 * 1024 * 1024 bytes)
+
+            if (fileSize > maxSize) {
+                alert('Ukuran file terlalu besar! Maksimum 2MB.');
+                el.value = ''; // Mengosongkan input file
+            }
+        }
 
         function getRandomColor() {
             const colors = ['yellow', 'green', 'red', 'orange'];
