@@ -119,7 +119,7 @@
                         </td>
                         <td class='d-flex gap-3'>
                             <button class="btn btn-outline-dark px-4" onclick="handleClickFile(this)" data-draf="{{ asset('storage/'.$item->file) }}" @if(is_null($item->file)) disabled @endif data-bs-toggle="modal" data-bs-target="#lihatFile">Lihat File</button>
-                            <button class="btn btn-success px-4" data-meet="{{ $item->id }}" onclick="getMeetId(this)" data-bs-toggle="modal" data-bs-target="#tambahCatatan">Edit Catatan</button>
+                            <button class="btn btn-success px-4" data-meet="{{ $item->id }}" onclick="getMeetId(this)" data-note="{{ $item->catatan }}" data-bs-toggle="modal" data-bs-target="#tambahCatatan">Edit Catatan</button>
                         </td>
                     </tr>
                     @endforeach
@@ -193,7 +193,12 @@
 
         let meetId;
 
-        const getMeetId = btn => meetId = btn.dataset.meet
+        // const getMeetId = btn => meetId = btn.dataset.meet
+
+        function getMeetId(btn){
+            meetId = btn.dataset.meet
+            document.querySelector('#catatanTerima').value = btn.dataset.note
+        }
 
         const handleSubmitCatatan = () => {
             Livewire.emit('submitCatatan',meetId)
