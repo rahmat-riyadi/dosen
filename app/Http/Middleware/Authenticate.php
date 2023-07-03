@@ -24,6 +24,10 @@ class Authenticate extends Middleware
                 return route('mahasiswa');
             }
 
+            if(Route::is('admin.*')){
+                return route('admin');
+            }
+
             return route('login');
 
         }

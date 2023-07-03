@@ -31,6 +31,10 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::MAHASISWA);
             }
 
+            if($guard == 'admin' && Auth::guard($guard)->check()){
+                return redirect(RouteServiceProvider::ADMIN);
+            }
+
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }

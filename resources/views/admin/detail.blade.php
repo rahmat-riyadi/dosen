@@ -27,13 +27,11 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav d-flex w-100 justify-content-between align-items-center">
                     <div class='d-flex gap-2'>
-                        <a class="nav-link" aria-current="page" href="/dosen">Beranda</a>
-                        <a class="nav-link active" href="/">Mahasiswa Bimbingan</a>
                     </div>
                     <div class='nav-item d-flex'>
                         <div class='text-end me-3'>
-                            <p class='fw-semibold'>{{ auth()->user()->nama }}</p>
-                            <p class='nim'>{{ auth()->user()->nip }}</p>
+                            <p class='fw-semibold'>Admin</p>
+                            <p class='nim'>Admin</p>
                         </div>
                         <div class="dropdown d-flex align-items-center">
                             <img class='rounded-circle' height='40px' width='40px' src="https://wallpapers.com/images/hd/aesthetic-anime-profile-pictures-act70lmrgm5gxgbk.jpg" alt="">
@@ -69,14 +67,11 @@
                     <p class='mb-2 fw-bold h6'>{{ $mahasiswa->nama }}</p>
                     <small>{{ $mahasiswa->nim }}</small>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#lihatSK">Lihat SK</button>
-                </div>
             </div>
             <div class="bg-white rounded-3 px-4 py-3">
                 <small>Judul Skripsi</small>
                 <div class="border d-flex rounded-3 flex-column flex-md-row justify-content-between align-items-center px-4 py-4">
-                    <small class='mb-4 mb-md-0 fw-semibold'>{{ $judul->judul }}</small>
+                    <small class='mb-4 mb-md-0 fw-semibold'>{{ $mahasiswa->judul }}</small>
                 </div>
             </div>
         </div>
@@ -139,26 +134,6 @@
 
 
     <!-- Modals -->
-
-    <!-- Modal Lihat SK -->
-    <div class="modal fade" id="lihatSK" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Surat Keputusan</h5>
-                    <p class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class='h-100'>
-                        <iframe src="{{ asset('storage/'.$judul->file) }}" t width="100%" height="100%"></iframe>
-                    </div>
-                </div> v
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal Lihat File -->
     <div class="modal fade" id="lihatFile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -28,7 +28,8 @@ class Mahasiswa extends Authenticatable
             'tanggal',
             'file',
             'catatan',
-            'pertemuan'
+            'pertemuan',
+            'id'
         ]);
     }
 

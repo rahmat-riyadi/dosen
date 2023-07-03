@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->unsignedBigInteger('dosen_id');
             $table->foreign('dosen_id')->references('id')->on('dosen');
-            $table->enum('status', ['Menunggu', 'Jadwal Diterima', 'Atur Ulang Jadwal']);
+            $table->enum('status', ['Menunggu', 'Jadwal Diterima', 'Atur Ulang Jadwal', 'Terlaksana', 'Tidak Terlaksana']);
             $table->date('tanggal');
             $table->time('waktu');
             $table->unsignedBigInteger('pertemuan');

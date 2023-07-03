@@ -29,11 +29,15 @@ class LoginComponent extends Component
             'password' => 'required'
         ]);
 
-        if(Auth::guard('dosen')->attempt(['nip' => $this->username, 'password' => $this->password])){
+        if(Auth::guard('dosen')->attempt(['nip' => $this->username, 'password' => $this->password, 'is_active' => true])){
             return redirect(RouteServiceProvider::DOSEN);
         }
-        if(Auth::guard('mahasiswa')->attempt(['nim' => $this->username, 'password' => $this->password])){
+        if(Auth::guard('mahasiswa')->attempt(['nim' => $this->username, 'password' => $this->password, 'is_active' => true])){
             return redirect(RouteServiceProvider::MAHASISWA);
+        }
+
+        if(Auth::guard('admin')->attempt(['username' => $this->username, 'password' => $this->password])){
+            return redirect(RouteServiceProvider::ADMIN);
         }
 
 

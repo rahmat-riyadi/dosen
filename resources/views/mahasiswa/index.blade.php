@@ -149,6 +149,14 @@
                                 <div class="badge rounded-pill text-bg-warning">
                                     {{ $jadwal->pivot->status }}
                                 </div>
+                                @elseif($jadwal->pivot->status == 'Terlaksana')
+                                <div class="badge rounded-pill text-bg-info">
+                                    {{ $jadwal->pivot->status }}
+                                </div>
+                                @elseif($jadwal->pivot->status == 'Tidak Terlaksana')
+                                <div class="badge rounded-pill text-bg-secondary">
+                                    {{ $jadwal->pivot->status }}
+                                </div>
                                 @else
                                 <div class="badge rounded-pill text-bg-danger">
                                     {{ $jadwal->pivot->status }}
@@ -160,7 +168,15 @@
                                 <button class="btn btn-outline-dark" onclick="handleClickDraft(this)" data-draf="{{ $jadwal->pivot->file }}" data-bs-toggle="modal" data-bs-target="#lihatFile">Lihat File</button>
                                 @endif
                                 @if ($jadwal->pivot->status == 'Jadwal Diterima')
-                                    <button class="btn btn-success px-4" onclick="handleClickNote(this)" data-note="{{ $jadwal->pivot->catatan }}" data-bs-toggle="modal" data-bs-target="#detailCatatan">Catatan</button>
+                                <button class="btn btn-success px-4" onclick="handleClickNote(this)" data-note="{{ $jadwal->pivot->catatan }}" data-bs-toggle="modal" data-bs-target="#detailCatatan">Catatan</button>
+                                @endif
+                                @if (Carbon\Carbon::now() > Carbon\Carbon::parse($jadwal->pivot->tanggal))
+                                <button onclick="handleScheduleStatus(this)" data-meet="{{ $jadwal->pivot->id }}" data-status="Terlaksana" class="btn btn-outline-info btn-sm p-2 me-3">
+                                    Terlaksana 
+                                </button>
+                                <button onclick="handleScheduleStatus(this)" data-meet="{{ $jadwal->pivot->id }}" data-status="Tidak Terlaksana" class="btn btn-outline-secondary btn-sm p-2">
+                                    Tidak Terlaksana
+                                </button>
                                 @endif
                             </td>
                         </tr>
@@ -237,6 +253,9 @@
     <script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.js"></script>
     <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.js"></script>
     <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+
     {{-- <script src="{{ asset('assets/js/calendar.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/gh/coswise/hicon-js@latest/hicon.min.js"></script>
     <script>
@@ -281,7 +300,7 @@
 
         const skModal = new bootstrap.Modal(document.querySelector('.skModal'))
         const passModal = new bootstrap.Modal(document.querySelector('.passModal'))
-        const swalWithBootstrapButtons = Swal.mixin({ customClass: { confirmButton: 'btn btn-danger font-light', }, buttonsStyling: false})
+        const swalWithBootstrapButtons = Swal.mixin({ customClass: { confirmButton: 'btn btn-danger font-light', cancelButton: 'btn btn-secondary font-light me-2'}, buttonsStyling: false})
 
         Livewire.on('handleSubmitSK', data => {
             console.log(data)
@@ -314,6 +333,41 @@
     </script>
 
     <script>
+
+        function handleScheduleStatus(el){
+
+            const id = el.dataset.meet
+            const status = el.dataset.status
+
+            swalWithBootstrapButtons.fire({
+                title: 'Pemberitahuan',
+                text: 'yakin ingin merubah status pertemuan ?',
+                icon: 'question',
+                cancelButtonText: 'batal',
+                showCancelButton: true,
+                reverseButtons: true
+            })
+            .then( ({ isConfirmed }) => {
+
+                if(isConfirmed){
+                    $.get(`mahasiswa/jadwal/${id}/${status}`)
+                    .then(data => {
+                        swalWithBootstrapButtons.fire({
+                            title: data.status ? 'Berhasil' : 'Gagal',
+                            text: data.msg,
+                            icon: data.status ? 'success' : 'warning',
+                            reverseButtons: true,
+                            confirmButtonText: 'Ok',
+                        })
+                        .then(() => {
+                            window.location.reload()
+                        })
+                    })
+                }
+
+            })
+
+        }
 
         function checkSize(el){
             var file = el.files[0];

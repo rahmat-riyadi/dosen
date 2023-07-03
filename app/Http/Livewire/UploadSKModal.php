@@ -30,7 +30,7 @@ class UploadSKModal extends Component
     ];
 
     public function mount(){
-        $this->dosens = Dosen::all();
+        $this->dosens = Dosen::whereIsActive(true)->get();
     }
 
     public function render()

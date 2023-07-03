@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Admin;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use Carbon\Carbon;
@@ -39,6 +40,11 @@ class DatabaseSeeder extends Seeder
         Dosen::create([
             'nama' => 'dosen 3',
             'nip' => 'dosen3',
+            'password' => bcrypt('qazwsx')
+        ]);
+
+        Admin::create([
+            'username' => 'admin',
             'password' => bcrypt('qazwsx')
         ]);
 

@@ -44,6 +44,11 @@ return [
         'mahasiswa' => [
             'driver' => 'session',
             'provider' => 'mahasiswa',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
         ]
         
 
@@ -81,6 +86,11 @@ return [
         'dosen' => [
             'driver' => 'eloquent',
             'model' => App\Models\Dosen::class
+        ],
+
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class
         ],
 
         // 'users' => [

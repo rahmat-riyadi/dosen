@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('semester');
             $table->string('judul')->nullable();
+            $table->boolean('is_active')->nullable();
             $table->timestamps();
         });
     }

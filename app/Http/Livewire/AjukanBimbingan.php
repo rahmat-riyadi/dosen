@@ -29,7 +29,10 @@ class AjukanBimbingan extends Component
     ];
 
     public function mount(){
-        $this->dosens = Dosen::all();
+        $bimbingan = DB::table('bimbingan')->where('mahasiswa_id', auth()->user()->id)->first();
+        $this->dosens = Dosen::when(!empty($bimbingan), function($q) use ($bimbingan){
+            $q->where('id', $bimbingan->dosen_1_id)->orWhere('id', $bimbingan->dosen_2_id);
+        })->get();
     }
 
     public function render()
@@ -41,7 +44,6 @@ class AjukanBimbingan extends Component
         ->pluck('dosen_id')->toArray();
 
         return view('livewire.ajukan-bimbingan',[
-            'dosens' => Dosen::all(),
             'pendingDosen' => $pendingDosen
         ]);
     }
