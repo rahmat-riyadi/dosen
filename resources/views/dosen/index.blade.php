@@ -117,7 +117,7 @@
                 </thead>
                 <tbody>
                     @foreach (auth()->user()->jadwal as $item)
-                        @if ($item->pivot->status == 'Menunggu')
+                        @if (Carbon\Carbon::parse($item->pivot->tanggal) > Carbon\Carbon::now())
                             <tr>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->nim }}</td>

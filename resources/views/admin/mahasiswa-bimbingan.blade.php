@@ -66,14 +66,14 @@
     <section class='bg-primary py-2 mb-4'>
         <div class='container-fluid py-4 px-5'>
             <div class="text-white mb-3">
-                <h3>Selamat datang, admin</h3>
+                <h3> <span class="fw-reguler" style="font-weight: 400 !important;" >Daftar Mahasiswa Bimbingan :</span> {{ $dosen->nama }}</h3>
             </div>
         </div>
     </section>
 
     <!-- Aktivitas Bimbingan -->
     <main class='container-fluid px-5'>
-        <h3>Pengajuan Bimbingan</h3>
+        <h3>Mahasiswa Bimbingan</h3>
         <div class="table-responsive">
             <table class="table align-middle fw-semibold">
                 <thead>
@@ -91,7 +91,8 @@
                         <td>{{ $item->nim }}</td>
                         <td>{{ $item->judul }}</td>
                         <td class='d-flex gap-3 '>
-                            <a href="/admin/dosen/{{ $dosen_id }}/mahasiswa/{{ $item->id }}" class="btn btn-outline-dark" >Lihat Detail</a>
+                            <a href="/admin/dosen/{{ $dosen_id }}/mahasiswa/{{ $item->id
+                             }}" class="btn btn-outline-dark" >Lihat Detail</a>
                         </td>
                     </tr>
                     @endforeach

@@ -67,6 +67,9 @@
                     <p class='mb-2 fw-bold h6'>{{ $mahasiswa->nama }}</p>
                     <small>{{ $mahasiswa->nim }}</small>
                 </div>
+                <div>
+                    <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#lihatSK">Lihat SK</button>
+                </div>
             </div>
             <div class="bg-white rounded-3 px-4 py-3">
                 <small>Judul Skripsi</small>
@@ -88,7 +91,6 @@
                         <th>Waktu Bimbingan</th>
                         <th>Deskripsi</th>
                         <th>Status</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -120,10 +122,6 @@
                             </div>
                             @endif
                         </td>
-                        <td class='d-flex gap-3'>
-                            <button class="btn btn-outline-dark px-4" onclick="handleClickFile(this)" data-draf="{{ asset('storage/'.$item->file) }}" @if(is_null($item->file)) disabled @endif data-bs-toggle="modal" data-bs-target="#lihatFile">Lihat File</button>
-                            <button class="btn btn-success px-4" data-meet="{{ $item->id }}" onclick="getMeetId(this)" data-note="{{ $item->catatan }}" data-bs-toggle="modal" data-bs-target="#tambahCatatan">Edit Catatan</button>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -148,6 +146,25 @@
                         <iframe class="draf-modal" width="100%" height="100%"></iframe>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="lihatSK" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Surat Keputusan</h5>
+                    <p class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class='h-100'>
+                        <iframe src="{{ asset('storage/'.$bimbingan->file) }}" t width="100%" height="100%"></iframe>
+                    </div>
+                </div> v
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tutup</button>
                 </div>

@@ -171,12 +171,14 @@
                                 <button class="btn btn-success px-4" onclick="handleClickNote(this)" data-note="{{ $jadwal->pivot->catatan }}" data-bs-toggle="modal" data-bs-target="#detailCatatan">Catatan</button>
                                 @endif
                                 @if (Carbon\Carbon::now() > Carbon\Carbon::parse($jadwal->pivot->tanggal))
-                                <button onclick="handleScheduleStatus(this)" data-meet="{{ $jadwal->pivot->id }}" data-status="Terlaksana" class="btn btn-outline-info btn-sm p-2 me-3">
-                                    Terlaksana 
-                                </button>
-                                <button onclick="handleScheduleStatus(this)" data-meet="{{ $jadwal->pivot->id }}" data-status="Tidak Terlaksana" class="btn btn-outline-secondary btn-sm p-2">
-                                    Tidak Terlaksana
-                                </button>
+                                @if ($jadwal->pivot->status != 'Terlaksana' && $jadwal->pivot->status != 'Tidak Terlaksana')
+                                    <button onclick="handleScheduleStatus(this)" data-meet="{{ $jadwal->pivot->id }}" data-status="Terlaksana" class="btn btn-outline-info btn-sm p-2 me-3">
+                                        Terlaksana 
+                                    </button>
+                                    <button onclick="handleScheduleStatus(this)" data-meet="{{ $jadwal->pivot->id }}" data-status="Tidak Terlaksana" class="btn btn-outline-secondary btn-sm p-2">
+                                        Tidak Terlaksana
+                                    </button>
+                                @endif
                                 @endif
                             </td>
                         </tr>

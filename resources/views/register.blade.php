@@ -34,7 +34,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="inputNIMNIPNIDN" class="form-label">NIM/NIP/NIDN</label>
-                            <input name="nimNip" type="text" class="form-control" id="inputNIMNIPNIDN">
+                            <input name="nip" type="number" class="form-control" id="inputNIMNIPNIDN">
                         </div>
                         <div class="mb-4">
                             <label for="inputPassword" class="form-label">Password</label>
@@ -50,8 +50,8 @@
                         </div>
                         <div class="nim-input d-none">
                             <div class="mb-3">
-                                <label for="nim" class="form-label">Nim</label>
-                                <input name="nim" type="text" class="form-control" id="nim">
+                                <label for="judul" class="form-label">Judul</label>
+                                <input name="judul" type="text" class="form-control" id="nim">
                             </div>
                             <div class="mb-3">
                                 <label for="semester" class="form-label">Semester</label>

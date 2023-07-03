@@ -40,20 +40,25 @@ class AdminController extends Controller
                         ->join('mahasiswa', 'mahasiswa.id', '=', 'bimbingan.mahasiswa_id')
                         ->get();
         $dosen_id = $id;
+        $dosen = Dosen::find($dosen_id);
 
-        return view("$this->folder.mahasiswa-bimbingan", compact('mahasiswas', 'dosen_id'));
+        return view("$this->folder.mahasiswa-bimbingan", compact('mahasiswas', 'dosen_id', 'dosen'));
     }
 
     public function detailMahasiswa($dosen_id, $mahasiswa_id){
 
         $mahasiswa = Mahasiswa::find($mahasiswa_id);
 
+        
+
         $jadwal = DB::table('jadwal')
                         ->where('dosen_id', $dosen_id)
                         ->where('mahasiswa_id', $mahasiswa_id)
                         ->get();
 
-        return view("$this->folder.detail", compact('jadwal', 'mahasiswa'));
+        $bimbingan = DB::table('bimbingan')->where('mahasiswa_id', $mahasiswa_id)->first();
+
+        return view("$this->folder.detail", compact('jadwal', 'mahasiswa', 'bimbingan', 'dosen'));
     }
 
     public function accAccount($id){

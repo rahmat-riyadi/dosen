@@ -67,7 +67,6 @@
         <div class='container-fluid py-4 px-5'>
             <div class="text-white mb-3">
                 <h3>Selamat datang, admin</h3>
-                <small>Semoga dapat membimbing mahasiswa anda dengan baik!</small>
             </div>
             <div class="bg-white rounded-3 px-4 py-3">
                 <p class="fw-semibold" >Verifikasi Mahasiswa</p>
@@ -131,7 +130,7 @@
 
     <!-- Aktivitas Bimbingan -->
     <main class='container-fluid px-5'>
-        <h3>Pengajuan Bimbingan</h3>
+        <h3>Aktivitas Bimbingan</h3>
         <div class="table-responsive">
             <table class="table align-middle fw-semibold">
                 <thead>

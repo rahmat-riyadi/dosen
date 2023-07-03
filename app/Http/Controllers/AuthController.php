@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use Carbon\Exceptions\Exception;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,19 +36,32 @@ class AuthController extends Controller
         try {
 
             if($request->status == 'mahasiswa'){
-    
+
+                $flag = Mahasiswa::where('nim', $request->nip)->first();
+
+                if(!empty($flag)){
+                    return redirect('/login')->with('message', 'nim sudah terdaftar');
+                }
+
                 Mahasiswa::create([
                     'nama' => $request->nama,
-                    'nim' => $request->nim,
+                    'nim' => $request->nip,
                     'password' => bcrypt($request->password),
-                    'semester' => $request->semester
+                    'semester' => $request->semester,
+                    'judul' => $request->judul
                 ]);
     
             } else {
+
+                $request->validate([
+                    'nip' => 'unique:dosen'
+                ],[
+                    'nip.unique' => 'nip sudah terdaftar'
+                ]);
     
                 Dosen::create([
                     'nama' => $request->nama,
-                    'nip' => $request->nim,
+                    'nip' => $request->nip,
                     'password' => bcrypt($request->password),
                 ]);
     
