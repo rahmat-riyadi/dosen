@@ -49,7 +49,7 @@ class AdminController extends Controller
 
         $mahasiswa = Mahasiswa::find($mahasiswa_id);
 
-        
+        // $dosen = Dosen::find($dosen_id);
 
         $jadwal = DB::table('jadwal')
                         ->where('dosen_id', $dosen_id)
@@ -58,7 +58,7 @@ class AdminController extends Controller
 
         $bimbingan = DB::table('bimbingan')->where('mahasiswa_id', $mahasiswa_id)->first();
 
-        return view("$this->folder.detail", compact('jadwal', 'mahasiswa', 'bimbingan', 'dosen'));
+        return view("$this->folder.detail", compact('jadwal', 'mahasiswa', 'bimbingan'));
     }
 
     public function accAccount($id){
