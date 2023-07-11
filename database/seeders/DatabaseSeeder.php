@@ -28,24 +28,27 @@ class DatabaseSeeder extends Seeder
         Dosen::create([
             'nama' => 'dosen 1',
             'nip' => 'dosen1',
-            'password' => bcrypt('qazwsx')
+            'password' => bcrypt('qazwsx'),
+            'is_active' => true
         ]);
 
         Dosen::create([
             'nama' => 'dosen 2',
             'nip' => 'dosen2',
-            'password' => bcrypt('qazwsx')
+            'password' => bcrypt('qazwsx'),
+            'is_active' => true
         ]);
 
         Dosen::create([
             'nama' => 'dosen 3',
             'nip' => 'dosen3',
-            'password' => bcrypt('qazwsx')
+            'password' => bcrypt('qazwsx'),
+            'is_active' => true
         ]);
 
         Admin::create([
             'username' => 'admin',
-            'password' => bcrypt('qazwsx')
+            'password' => bcrypt('qazwsx'),
         ]);
 
         Mahasiswa::create([
@@ -53,6 +56,7 @@ class DatabaseSeeder extends Seeder
             'nim' => 'mahasiswa',
             'password' => bcrypt('qazwsx'),
             'semester' => '1',
+            'is_active' => true
         ]);
 
         Mahasiswa::create([
@@ -60,6 +64,7 @@ class DatabaseSeeder extends Seeder
             'nim' => 'mahasiswa1',
             'password' => bcrypt('qazwsx'),
             'semester' => '1',
+            'is_active' => true
         ]);
 
     }

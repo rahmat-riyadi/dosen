@@ -40,7 +40,9 @@ class AjukanBimbingan extends Component
 
         $pendingDosen = DB::table('jadwal')
         ->where('mahasiswa_id', auth()->user()->id)
-        ->where('status', 'Menunggu')
+        ->where('status','Menunggu')
+        ->orWhere('status','Jadwal Diterima')
+        ->orWhere('status','Atur Ulang Jadwal')
         ->pluck('dosen_id')->toArray();
 
         return view('livewire.ajukan-bimbingan',[
@@ -82,6 +84,7 @@ class AjukanBimbingan extends Component
             $latestBimbingan = DB::table('jadwal')
             ->where('mahasiswa_id', auth()->user()->id)
             ->where('dosen_id', $this->dosen_id)
+            ->where('status', 'Terlaksana')
             ->latest()
             ->first('pertemuan');
 

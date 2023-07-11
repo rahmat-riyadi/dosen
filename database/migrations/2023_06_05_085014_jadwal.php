@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('status', ['Menunggu', 'Jadwal Diterima', 'Atur Ulang Jadwal', 'Terlaksana', 'Tidak Terlaksana']);
             $table->date('tanggal');
             $table->time('waktu');
-            $table->unsignedBigInteger('pertemuan');
+            $table->unsignedBigInteger('pertemuan')->nullable();
             $table->string('file')->nullable();
             $table->text('catatan')->nullable();
             $table->timestamps();
